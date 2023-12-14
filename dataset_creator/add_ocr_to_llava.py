@@ -28,10 +28,10 @@ if __name__ == '__main__':
         copy_obj = copy.deepcopy(obj)
         
         new_value = ""
-        new_value += "<image>This is a meme with the following text written inside the meme: \n"
+        new_value += "<image>This is a meme with the following text written inside the meme: \n "
         new_value += "\""
-        new_value += "\n".join(reader.readtext(os.path.join(args.images_path, obj['image']), detail=0))
-        new_value += "\". \n"
+        new_value += " \n ".join(reader.readtext(os.path.join(args.images_path, obj['image']), detail=0))
+        new_value += "\". \n "
         new_value += "What is the meme poster trying to convey?"
         
         copy_obj['conversations'][0]['value'] = new_value
