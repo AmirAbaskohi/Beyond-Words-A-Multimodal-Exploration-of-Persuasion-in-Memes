@@ -35,8 +35,8 @@ if __name__ == '__main__':
         new_value += "What is the meme poster trying to convey?"
         
         copy_obj['conversations'][0]['value'] = new_value
-        print(copy_obj)
-        quit()
+
+        llava_dataset_ocr.append(copy_obj)
 
     with open(new_path, 'w') as llava_dataset_file:
         json.dump(llava_dataset_ocr, llava_dataset_file, indent=4)
