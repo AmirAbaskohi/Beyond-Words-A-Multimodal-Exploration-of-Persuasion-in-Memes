@@ -12,13 +12,11 @@ if __name__ == '__main__':
     parser.add_argument('--images_path', type=str, help='Path to the llava dataset\'s images exist.')
 
     args = parser.parse_args()
-    
-    file_path = args.path
 
-    with open(file_path, 'r') as file:
+    with open(args.data_path, 'r') as file:
         data = json.load(file)
 
-    directory, original_file = os.path.split(file_path)
+    directory, original_file = os.path.split(args.data_path)
     new_file = "llava_dataset_ocr.json"
     new_path = os.path.join(directory, new_file)
 
