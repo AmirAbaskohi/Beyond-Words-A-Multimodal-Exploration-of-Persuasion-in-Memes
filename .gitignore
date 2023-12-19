@@ -162,3 +162,4 @@ cython_debug/
 # Train and test data folders
 train/
 test/
+pesuation_data/
