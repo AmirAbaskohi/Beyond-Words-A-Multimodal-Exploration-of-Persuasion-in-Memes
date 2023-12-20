@@ -3,9 +3,13 @@ import json
 import os
 import shutil
 
-def check_addresses_exist(annotation_address, output_location, images_address=None):
+def check_addresses_exist(annotation_address, output_location, images_address=None, caption_address=None):
     if not os.path.isfile(annotation_address):
         print(f"Error: The annotation file '{annotation_address}' does not exist.")
+        exit()
+
+    if caption_address != None and (not os.path.isfile(caption_address)):
+        print(f"Error: The annotation file '{caption_address}' does not exist.")
         exit()
 
     if not os.path.isdir(output_location):
@@ -17,22 +21,22 @@ def check_addresses_exist(annotation_address, output_location, images_address=No
         exit()
 
 def create_necessary_directories(save_address, dataset_dir_name, create_images_dir=False):
-    llava_dataset_path = os.path.join(save_address, dataset_dir_name)
+    dataset_path = os.path.join(save_address, dataset_dir_name)
 
-    if not os.path.exists(llava_dataset_path):
-        os.makedirs(llava_dataset_path)
-        print(f"Created directory: {llava_dataset_path}")
+    if not os.path.exists(dataset_path):
+        os.makedirs(dataset_path)
+        print(f"Created directory: {dataset_path}")
 
     if not create_images_dir:
-        return llava_dataset_path, None
+        return dataset_path, None
 
-    images_path = os.path.join(llava_dataset_path, 'images')
+    images_path = os.path.join(dataset_path, 'images')
     
     if not os.path.exists(images_path):
         os.makedirs(images_path)
         print(f"Created directory: {images_path}")
 
-    return llava_dataset_path, images_path
+    return dataset_path, images_path
 
 def read_dataset_file(dataset_path):
     with open(dataset_path, 'r', encoding='utf-8') as file:
@@ -80,3 +84,11 @@ def copy_image(images_directory, output_images_directoy, image_name, new_image_n
     destination_path = os.path.join(output_images_directoy, new_image_name)
 
     shutil.copy(source_path, destination_path)
+
+def read_captions_file(file_path):
+    json_list = []
+    with open(file_path, 'r') as file:
+        for line in file:
+            data = json.loads(line)
+            json_list.append(data)
+    return json_list

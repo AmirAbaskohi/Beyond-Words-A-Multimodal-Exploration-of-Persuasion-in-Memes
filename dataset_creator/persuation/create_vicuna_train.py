@@ -1,7 +1,7 @@
 from utils import (
     check_addresses_exist,
     create_necessary_directories, read_dataset_file,
-    create_persuasion_label, copy_image
+    create_persuasion_label, read_captions_file
 )
 from tqdm import tqdm
 import argparse
@@ -14,24 +14,26 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process meme caption dataset.")
     
     parser.add_argument('--annotation_address', type=str, help='Path to annotation file')
-    parser.add_argument('--images_address', type=str, help='Path to images directory')
-    parser.add_argument('--output_location', type=str, help='Path to the output folder')
+    parser.add_argument('--caption_address', type=str, help='Path to meme captions file')
+    parser.add_argument('--output_location', type=str, help='Path to the output directory')
 
     args = parser.parse_args()
 
     annotation_address = args.annotation_address or './data/subtask2a/train.json'
-    images_address = args.images_address or './train_images'
+    caption_address = args.caption_address or './captions/llm_finetuned_train.jsonl'
     output_location = args.output_location or './'
     
-    check_addresses_exist(annotation_address, output_location, images_address=images_address)
-    llava_dataset_path, llava_data_images_path = create_necessary_directories(output_location, 'pesuation_llava_dataset', True)
+    check_addresses_exist(annotation_address, output_location, caption_address=caption_address)
+    vicuna_dataset_path, _ = create_necessary_directories(output_location, 'pesuation_vicuna_dataset', False)
 
     persuation_dataset = read_dataset_file(annotation_address)
-    llava_dataset = []
+    persuasion_captions = read_captions_file(caption_address)
+    vicuna_dataset = []
 
     prompt_template = """
-        <image>This is a meme with the following text written inside the meme: \"<MemeText>\". \
-        Given a meme and its text, predict the logical fallacies and emotional persuasion techniques class labels used in this meme. Here are the classes: \n \
+        There is a meme with text written inside the meme: \"<MemeText>\". \
+        Also the caption of the meme is: \"<MemeCaption>\". \
+        Given a meme caption and the text written in it, predict the logical fallacies and emotional persuasion techniques class labels used in this meme. Here are the classes: \n \
         1-Repetition, 2-Obfuscation, Intentional vagueness, Confusion, 3-Reasoning, 4-Simplification, 5-Causal Oversimplification, \
         6-Black-and-white Fallacy/Dictatorship, 7-Thought-terminating cliché, 8-Distraction, 9-Misrepresentation of Someone's Position (Straw Man), \
         10-Presenting Irrelevant Data (Red Herring), 11-Whataboutism, 12-Justification, 13-Slogans, 14-Bandwagon, 15-Appeal to authority, \
@@ -41,20 +43,17 @@ if __name__ == "__main__":
     """
     prompt_template = prompt_template.replace("  ", " ").replace("   ", " ").strip()
 
+    i = 0
     for d in tqdm(persuation_dataset):   
         generated_id = str(uuid.uuid4())
-        image_format = d["image"].split(".")[-1]
         image_text = d["text"].replace("\\n", "\n").strip("\n").replace("\n", " \n ").strip()
 
-        copy_image(images_address, llava_data_images_path, d["image"], f"{generated_id}.{image_format}")
-
-        llava_dataset.append({
+        vicuna_dataset.append({
             "id": generated_id,
-            "image": f"{generated_id}.{image_format}",
             "conversations": [
                 {
                     "from": "human",
-                    "value": prompt_template.replace("<MemeText>", image_text)
+                    "value": prompt_template.replace("<MemeText>", image_text).replace("<MemeCaption>", persuasion_captions[i]["text"])
                 },
                 {
                     "from": "gpt",
@@ -62,7 +61,9 @@ if __name__ == "__main__":
                 }
             ]
         })
+        
+        i += 1
 
-    print("Saving llava dataset ...")
-    with open(os.path.join(llava_dataset_path, 'llava_dataset.json'), 'w') as llava_dataset_file:
-        json.dump(llava_dataset, llava_dataset_file, indent=4)
+    print("Saving vicuna dataset ...")
+    with open(os.path.join(vicuna_dataset_path, 'vicuna_dataset.json'), 'w') as vicuna_dataset_file:
+        json.dump(vicuna_dataset, vicuna_dataset_file, indent=4)
