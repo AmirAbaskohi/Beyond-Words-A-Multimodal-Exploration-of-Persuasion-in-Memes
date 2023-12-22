@@ -77,7 +77,7 @@ def create_persuasion_label(labels):
     }
 
     sorted_labels = sorted(labels, key=lambda x: order_table[x])
-    return ("<sep>".join(sorted_labels)).replace("é", "e")
+    return ("<sep>".join(sorted_labels))
 
 def copy_image(images_directory, output_images_directoy, image_name, new_image_name):
     source_path = os.path.join(images_directory, image_name)
