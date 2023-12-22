@@ -2,6 +2,7 @@ import datasets
 import json
 import os
 import shutil
+import random
 
 def check_addresses_exist(annotation_address, output_location, images_address=None, caption_address=None):
     if not os.path.isfile(annotation_address):
@@ -92,3 +93,26 @@ def read_captions_file(file_path):
             data = json.loads(line)
             json_list.append(data)
     return json_list
+
+def generate_random_numbers(max_num, n, exclude_list):
+    random_numbers = set()
+    while len(random_numbers) < n:
+        num = random.randint(0, max_num - 1)
+        if num not in exclude_list:
+            random_numbers.add(num)
+
+    return list(random_numbers)
+
+def create_few_shot_examples(indexes, annotations, captions):
+    examples = []
+    counter = 1
+    for i in indexes:
+        example = f"{counter}. \n "
+        annotation = annotations[i]["text"].replace("\\n", "\n").strip("\n").replace("\n", " \n ").strip()
+        caption = captions[i]["text"]
+        example += f"Text Writtent in the meme: {annotation} \n "
+        example += f"Caption: {caption} \n "
+        example += f"Label: {create_persuasion_label(annotations[i]['labels'])}"
+        examples.append(example)
+        counter += 1
+    return examples

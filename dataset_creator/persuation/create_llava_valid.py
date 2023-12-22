@@ -50,7 +50,7 @@ if __name__ == "__main__":
         question_id += 1
 
     print("Saving llava dataset ...")
-    with open(os.path.join(llava_dataset_path, 'llava_dataset.jsonl'), 'w') as llava_dataset_file:
+    with open(os.path.join(llava_dataset_path, 'llava_dataset_projector.jsonl'), 'w') as llava_dataset_file:
         for obj in llava_dataset:
             json_line = json.dumps(obj)
             llava_dataset_file.write(json_line + '\n')
