@@ -37,7 +37,7 @@ if __name__ == "__main__":
         6-Black-and-white Fallacy/Dictatorship, 7-Thought-terminating cliché, 8-Distraction, 9-Misrepresentation of Someone's Position (Straw Man), \
         10-Presenting Irrelevant Data (Red Herring), 11-Whataboutism, 12-Justification, 13-Slogans, 14-Bandwagon, 15-Appeal to authority, \
         16-Flag-waving, 17-Appeal to fear/prejudice, 18-Appeal to authority, 19-Glittering generalities (Virtue), 20-Doubt, 21-Name calling/Labeling, \
-        22-Smears, 23-Reductio ad hitlerum, 24-Transfer, 25-Exaggeration/Minimisation, 26-Loaded Language, 27-Appeal to (Strong) Emotions, 28-Flag-waving. \n \
+        22-Smears, 23-Reductio ad hitlerum, 24-Transfer, 25-Exaggeration/Minimisation, 26-Loaded Language, 27-Appeal to (Strong) Emotions. \n \
         Check each one of these technique and if that was used in the meme, put them in output and separate them with <sep>.
     """
     prompt_template = prompt_template.replace("  ", " ").replace("   ", " ").strip()

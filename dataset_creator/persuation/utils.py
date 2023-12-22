@@ -68,13 +68,12 @@ def create_persuasion_label(labels):
         "Glittering generalities (Virtue)": 19,
         "Doubt": 20,
         "Name calling/Labeling": 21,
-        "Smears": 21,
-        "Reductio ad hitlerum": 22,
-        "Transfer": 23,
-        "Exaggeration/Minimisation": 24,
-        "Loaded Language": 25,
-        "Appeal to (Strong) Emotions": 26,
-        "Flag-waving": 27
+        "Smears": 22,
+        "Reductio ad hitlerum": 23,
+        "Transfer": 24,
+        "Exaggeration/Minimisation": 25,
+        "Loaded Language": 26,
+        "Appeal to (Strong) Emotions": 27
     }
 
     sorted_labels = sorted(labels, key=lambda x: order_table[x])
