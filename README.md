@@ -1,7 +1,7 @@
-# <p align="center">Beyond Words: A Multimodal Exploration of Persuasion in Memes</p>
+# <p align="center">Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes</p>
 
 <h2 align="center">
-  <p><a href="https://semeval.github.io/SemEval2024">[SemEval@NAACL 2024]</a> Beyond Words: A Multimodal Exploration of Persuasion in Memes</p>
+  <p><a href="https://semeval.github.io/SemEval2024">[SemEval@NAACL 2024]</a> Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes</p>
 </h2>
 
 <p align="center">
@@ -12,7 +12,7 @@
 </p>
 
 ## Intro
-This repo covers the implementation of the following paper:  **[BCAmirs at SemEval-2024 Task 4: Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes]()** by [Amirhossein Abaskohi](https://amirabaskohi.github.io/), [Amirhossein Dabiriaghdam](https://dabiriaghdam.ir/), [Lele Wang](https://ece.ubc.ca/lele-wang/), [Giuseppe Carenini](https://www.cs.ubc.ca/~carenini/), accepted to SemEval@NAACL 2024.
+This repo covers the implementation of the following paper:  **[BCAmirs at SemEval-2024 Task 4: Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes]()** by [Amirhossein Abaskohi](https://amirabaskohi.github.io/), [Amirhossein Dabiriaghdam](https://dabiriaghdam.ir/), [Lele Wang](https://ece.ubc.ca/lele-wang/), and [Giuseppe Carenini](https://www.cs.ubc.ca/~carenini/), accepted to SemEval@NAACL 2024.
 
 ## Abstract
 Memes, combining text and images, frequently use metaphors to convey persuasive messages, shaping public opinion. Motivated by this, our team engaged in SemEval-2024 Task 4, a hierarchical multi-label classification task designed to identify rhetorical and psychological persuasion techniques embedded within memes. To tackle this problem, we introduced a caption generation step to assess the modality gap and the impact of additional semantic information from images, which improved our result. Our best model utilizes GPT-4 generated captions alongside meme text to fine-tune RoBERTa as the text encoder and CLIP as the image encoder. It outperforms the baseline by a large margin in all 12 subtasks. In particular, it ranked in top-3 across all languages in Subtask 2a, and top-4 in Subtask 2b, demonstrating quantitatively strong performance. The improvement achieved by the introduced intermediate step is likely attributable to the metaphorical essence of images that challenges visual encoders. This highlights the potential for improving abstract visual semantics encoding.
@@ -51,19 +51,19 @@ the meme, which is processed by the RoBERTa. The Vision encoder utilizes a pretr
 
 ## Dataset
 
-The main dataset of the task is not publicly avaialble and you request to the task organizers of the task. You can find task organizers using [this link](https://propaganda.math.unipd.it/semeval2024task4/). Also we utilzed the [MemeCap](https://aclanthology.org/2023.emnlp-main.89/) dataset as a part of our experiments.
+The main dataset of the task is not publicly available and you need to send a request to the task organizers of the task. You can find task organizers using [this link](https://propaganda.math.unipd.it/semeval2024task4/). Also we utilzed the [MemeCap](https://aclanthology.org/2023.emnlp-main.89/) dataset as a part of our experiments.
 
-Top use the models, you need to convert the datasets into their required format. Use the scripts in the "DatasetCreator" directory to generate them. To know their needed paprameters, run the following command for each script:
+To fine-tune/use the models, you need to transform the datasets into their required format. Use the scripts in the "DatasetCreator" directory to generate them. To understand the needed parameters, run the following command for each script:
 
 ```
 python3 script.py -h
 ```
 
-In some parts, you may require to our generated caption. In cases needed, you can contact the authors for the generated captions.
+For some parts, you may require our generated captions. In case needed, you can contact us (the authors) for the generated captions.
 
 ## How to run?
 
-After generating the required dataset using the "DatasetCreator" scripts, use the following commands for each model:
+After generating the required dataset with suitable data format for each model using the "DatasetCreator" scripts, use the following commands for each model:
 
 #### ConcatRoBERTa
 
@@ -78,7 +78,7 @@ Line 84: raw_train_ds = TRAIN_CSV_FILE
 Line 85: raw_val_ds = VALIDATION_CSV_FILE
 ```
 
-Also if you want to change using the "captions" in training, change `no_caption` in `preprocess_function`.
+Also if you want to decide whether to use the generated "captions" during training phase, change `no_caption` argument in `preprocess_function`.
 
 Then run the following command:
 
@@ -159,8 +159,6 @@ python3 LLaVA/llava/eval/model_vqa.py \
 ```
 
 #### RoBERTa
-First change the following lines based on your inputs (you can change the hyper-parameters in the code as well):
-
 ##### Fine-tune
 First change the following lines based on your inputs (you can change the hyper-parameters in the code as well):
 ```
@@ -172,7 +170,7 @@ LINE 53: VALIDATION_JSONL_FILE
 LINE 95: MODEL_CHECKPOINT_SAVE_PATH
 ```
 
-Also if you want to change using the "captions" in training, change `no_caption` in `preprocess_function`.
+Also if you want to decide whether to use the generated "captions" during training phase, change `no_caption` argument in `preprocess_function`.
 
 Then run the following command:
 
@@ -284,7 +282,7 @@ LINE 111: TRAIN_CSV_FILE
 LINE 112: VALIDATION_CSV_FILE
 ```
 
-Also if you want to change using the "captions" in training, change `no_caption` in `preprocess_function`.
+Also if you want to decide whether to use the generated "captions" during training phase, change `no_caption` argument in `preprocess_function`.
 
 Then run the following command:
 
@@ -316,8 +314,6 @@ python3 eval.py
 ```
 
 #### BLIP-2
-First change the following lines based on your inputs (you can change the hyper-parameters in the code as well):
-
 ##### Fine-tune
 First change the following lines based on your inputs (you can change the hyper-parameters in the code as well):
 ```
@@ -351,7 +347,7 @@ Then run the following command:
 python3 eval.py
 ```
 
-Also, to evaluate the generated captions you can run the following file in the memecap folder:
+Also, to evaluate the generated captions you can run the following python script in the MemeCap folder:
 ```
 python3 calc_metric.py
 ```
