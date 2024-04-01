@@ -12,7 +12,7 @@
 </p>
 
 ## Intro
-This repo covers the implementation of the following paper:  **[BCAmirs at SemEval-2024 Task 4: Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes]()** by [Amirhossein Abaskohi](https://amirabaskohi.github.io/), [Amirhossein Dabiriaghdam](https://dabiriaghdam.ir/), [Giuseppe Carenini](https://www.cs.ubc.ca/~carenini/), [Lele Wang](https://ece.ubc.ca/lele-wang/), accepted to SemEval@NAACL 2024.
+This repo covers the implementation of the following paper:  **[BCAmirs at SemEval-2024 Task 4: Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes]()** by [Amirhossein Abaskohi](https://amirabaskohi.github.io/), [Amirhossein Dabiriaghdam](https://dabiriaghdam.ir/), [Lele Wang](https://ece.ubc.ca/lele-wang/), [Giuseppe Carenini](https://www.cs.ubc.ca/~carenini/), accepted to SemEval@NAACL 2024.
 
 ## Abstract
 Memes, combining text and images, frequently use metaphors to convey persuasive messages, shaping public opinion. Motivated by this, our team engaged in SemEval-2024 Task 4, a hierarchical multi-label classification task designed to identify rhetorical and psychological persuasion techniques embedded within memes. To tackle this problem, we introduced a caption generation step to assess the modality gap and the impact of additional semantic information from images, which improved our result. Our best model utilizes GPT-4 generated captions alongside meme text to fine-tune RoBERTa as the text encoder and CLIP as the image encoder. It outperforms the baseline by a large margin in all 12 subtasks. In particular, it ranked in top-3 across all languages in Subtask 2a, and top-4 in Subtask 2b, demonstrating quantitatively strong performance. The improvement achieved by the introduced intermediate step is likely attributable to the metaphorical essence of images that challenges visual encoders. This highlights the potential for improving abstract visual semantics encoding.
@@ -295,7 +295,7 @@ python3 main.py
 ##### Evaluation
 First change the following lines based on your inputs:
 ```
-LINE 50: MODEL_CHECKPOIN_PATH
+LINE 50: MODEL_CHECKPOINT_PATH
 LINE 55: EXTRACTED_FEATURES_VALIDATION
 LINE 58: EXTRACTED_FEATURES_TRAIN
 .
@@ -313,6 +313,55 @@ Then run the following command:
 
 ```
 python3 eval.py
+```
+
+#### BLIP-2
+First change the following lines based on your inputs (you can change the hyper-parameters in the code as well):
+
+##### Fine-tune
+First change the following lines based on your inputs (you can change the hyper-parameters in the code as well):
+```
+LINE 12: TRAIN_DATASET_PATH
+.
+.
+.
+LINE 15: VALIDATION_DATASET_PATH
+```
+Then run the following command:
+
+```
+python3 train.py
+```
+
+##### Evaluation
+
+First change the following lines based on your inputs:
+
+```
+LINE 13: VALIDATION_DATASET_PATH
+.
+.
+.
+LINE 49: MODEL_PATH
+```
+
+Then run the following command:
+
+```
+python3 eval.py
+```
+
+Also, to evaluate the generated captions you can run the following file in the memecap folder:
+```
+python3 calc_metric.py
+```
+But first you may need to update the following lines:
+```
+LINE 7: MODEL_OUTPUT_JSONL
+.
+.
+.
+LINE 10: GROUND_TRUTH_JSON
 ```
 
 ## Results
@@ -343,5 +392,5 @@ compared to making decisions without leveraging their full capabilities.
 | VisualBERT (image+text+caption from LLaVA-1.5) | 57.714  | 57.841      | 62.690   |
 | ConcatRoBERTa (image+text)                     | 65.188  | 73.443      | 58.601   |
 | ConcatRoBERTa (image+text+caption from LLaVA-1.5)| 67.166 | 75.283      | 60.629   |
-| ConcatRoBERTa (image+text+caption from GPT-4)   | 71.115 | 76.101      | 66.742   |
+| ConcatRoBERTa (image+text+caption from GPT-4)   | **71.115** | 76.101      | 66.742   |
 | Baseline                                       | 44.706  | 68.778      | 33.116   |

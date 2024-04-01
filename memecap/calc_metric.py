@@ -10,7 +10,6 @@ with open('answers.jsonl', 'r') as file:
 with open('memes-test.json', 'r') as file:
     ground_truth_data = json.load(file)
 
-# Prepare references and hypotheses
 references = []
 references_bleu = []
 hypotheses = [item['text'] for item in model_output_data]
@@ -24,7 +23,6 @@ bleu = BLEU()
 bleu_score2 = bleu.corpus_score(hypotheses, references_bleu)
 
 
-# Calculate ROUGE-L using rouge_score
 rouge_scorer_obj = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
 
 s = 0
@@ -33,7 +31,6 @@ for i in range(len(hypotheses)):
     s += rouge_scores['rougeL'][2]
 print("ROUGE-L F-Scores avg:", s / len(hypotheses))
 
-# Calculate BERTScore
 P, R, F1 = score(hypotheses, references, model_type='microsoft/deberta-xlarge-mnli', lang="en", verbose=False)
 
 print(f"BLEU-4 Score: {bleu_score2.score:.4f}")
