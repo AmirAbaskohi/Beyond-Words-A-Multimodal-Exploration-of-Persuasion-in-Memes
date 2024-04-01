@@ -161,7 +161,7 @@ args.batch_sz = BATCH_SIZE
 
 
 dev = JsonlDataset(ds['validation'],
-    '/arc/project/st-wangll05-1/amir/concat_bert/dev_images',               
+    os.path.join(args.data_path, "dev_images"),#'/arc/project/st-wangll05-1/amir/concat_bert/dev_images',               
     tokenizer,
     model_transforms,
     args,

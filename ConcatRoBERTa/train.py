@@ -355,36 +355,3 @@ for i_epoch in range(start_epoch, args.max_epochs):
     if n_no_improve >= args.patience:
         print("No improvement. Breaking out of loop.")
         break
-
-
-load_checkpoint(model, os.path.join(args.savedir, f"{EPOCHS}checkpoint.pt"))
-model.eval()
-preds, test_metrics = model_eval(np.inf, val_loader, model, args, criterion)
-decoded_preds = [[id2label[i] for i, l in enumerate(row) if l == 1] for row in preds]
-
-def read_dataset_file(dataset_path):
-    with open(dataset_path, 'r', encoding='utf-8') as file:
-        jdata = json.load(file)
-    return jdata
-
-def transform_to_structure(text_list, ids_list):
-    transformed_data = []
-    for i, question_turns in enumerate(text_list, 1):
-            entry = {
-                "id": ids_list[i - 1],
-                "labels": question_turns if (len(question_turns) > 0) else []
-            }
-            transformed_data.append(entry)
-    return transformed_data
-    
-
-ids_list = list()
-jdata = read_dataset_file('/arc/project/st-wangll05-1/amir/concat_bert/dev_subtask2a_en.json')
-for d in jdata:
-    ids_list.append(d['id'])
-
-transformed_data = transform_to_structure(decoded_preds, ids_list)
-
-output_file_path = f'/scratch/st-wangll05-1/amir/concatBERT/outputs/concatBERT_{EPOCHS}epoch_clip_new_caption2.json'
-with open(output_file_path, 'w', encoding='utf-8') as output_file:
-    json.dump(transformed_data, output_file, indent=4, ensure_ascii=False)
