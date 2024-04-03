@@ -390,3 +390,10 @@ compared to making decisions without leveraging their full capabilities.
 | ConcatRoBERTa (image+text+caption from LLaVA-1.5)| 67.166 | 75.283      | 60.629   |
 | ConcatRoBERTa (image+text+caption from GPT-4)   | **71.115** | 76.101      | 66.742   |
 | Baseline                                       | 44.706  | 68.778      | 33.116   |
+
+## Citation
+
+```
+@inproceedings{
+}
+```
