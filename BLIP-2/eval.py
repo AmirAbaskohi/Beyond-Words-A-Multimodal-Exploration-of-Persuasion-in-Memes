@@ -46,13 +46,11 @@ def collate_fn(batch):
 processor = AutoProcessor.from_pretrained("Salesforce/blip2-opt-6.7b")
 model = Blip2ForConditionalGeneration.from_pretrained("Salesforce/blip2-opt-6.7b", device_map="auto", load_in_8bit=True)#, torch_dtype=torch.float16)
 
-peft_model_id = "BCAmirs/blip2-opt-6.7b-MemeCap"
+peft_model_id = PATH_TO_YOUR_SAVED_MODEL
 config = PeftConfig.from_pretrained(peft_model_id)
 
 model = Blip2ForConditionalGeneration.from_pretrained(config.base_model_name_or_path, device_map="auto", load_in_8bit=True)
 model = PeftModel.from_pretrained(model, peft_model_id)
-
-processor = AutoProcessor.from_pretrained("Salesforce/blip2-opt-6.7b")
 
 batch_size = 8
 predicts = []

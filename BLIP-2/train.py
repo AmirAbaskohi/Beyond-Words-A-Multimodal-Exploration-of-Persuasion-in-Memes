@@ -109,5 +109,3 @@ with open(loss_file_path, "w") as loss_file:
               model.save_pretrained(checkpoint_path)
               torch.save(optimizer.state_dict(), os.path.join(checkpoint_path, "optimizer_state_dict.pth"))
 
-
-# model.push_to_hub("BCAmirs/blip2-opt-6.7b-MemeCap")
