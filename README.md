@@ -6,14 +6,14 @@
 
 <p align="center">
   <br>
-  <a href="#"><img alt="Paper" src="https://img.shields.io/badge/📃-Paper-808080"></a>
+  <a href="https://arxiv.org/abs/2404.03022"><img alt="Paper" src="https://img.shields.io/badge/📃-Paper-808080"></a>
   <a href="#"><img alt="Video" src="https://img.shields.io/badge/​-Video-red?logo=youtube&logoColor=FF0000"></a>
   <a href="https://huggingface.co/AmirHossein1378/LLaVA-1.5-7b-meme-captioner"><img alt="Video" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue"></a>
   <a href="#"><img alt="Slides" src="https://img.shields.io/badge/​-Slides-FFBB00?logo=googlesheets&logoColor=FFBB00"></a>
 </p>
 
 ## Intro
-This repo covers the implementation of the following paper:  **[BCAmirs at SemEval-2024 Task 4: Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes]()** by [Amirhossein Abaskohi](https://amirabaskohi.github.io/), [Amirhossein Dabiriaghdam](https://dabiriaghdam.ir/), [Lele Wang](https://ece.ubc.ca/lele-wang/), and [Giuseppe Carenini](https://www.cs.ubc.ca/~carenini/), accepted to SemEval@NAACL 2024.
+This repo covers the implementation of the following paper:  **[BCAmirs at SemEval-2024 Task 4: Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes](https://arxiv.org/abs/2404.03022)** by [Amirhossein Abaskohi](https://amirabaskohi.github.io/), [Amirhossein Dabiriaghdam](https://dabiriaghdam.ir/), [Lele Wang](https://ece.ubc.ca/lele-wang/), and [Giuseppe Carenini](https://www.cs.ubc.ca/~carenini/), accepted to SemEval@NAACL 2024.
 
 ## Abstract
 Memes, combining text and images, frequently use metaphors to convey persuasive messages, shaping public opinion. Motivated by this, our team engaged in SemEval-2024 Task 4, a hierarchical multi-label classification task designed to identify rhetorical and psychological persuasion techniques embedded within memes. To tackle this problem, we introduced a caption generation step to assess the modality gap and the impact of additional semantic information from images, which improved our result. Our best model utilizes GPT-4 generated captions alongside meme text to fine-tune RoBERTa as the text encoder and CLIP as the image encoder. It outperforms the baseline by a large margin in all 12 subtasks. In particular, it ranked in top-3 across all languages in Subtask 2a, and top-4 in Subtask 2b, demonstrating quantitatively strong performance. The improvement achieved by the introduced intermediate step is likely attributable to the metaphorical essence of images that challenges visual encoders. This highlights the potential for improving abstract visual semantics encoding.
