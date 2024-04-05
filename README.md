@@ -68,19 +68,18 @@ For some parts, you may require our generated captions. In case needed, you can 
 
 Our meme captioner model, i.e., fine-tuned LLaVA-1.5-7B, is released [here on huggingface](https://huggingface.co/AmirHossein1378/LLaVA-1.5-7b-meme-captioner). To run it follow these steps:
 
-1. Clone this repository and navigate to LLaVA folder
+1. Clone this repository and navigate to LLaVA folder:
 ```
 git clone https://github.com/AmirAbaskohi/Beyond-Words-A-Multimodal-Exploration-of-Persuasion-in-Memes.git
 cd LLaVA
 ```
 2. Run the following commands:
 ```
-conda create -n llava_captioner python=3.8 -y
+conda create -n llava_captioner python=3.10 -y
 conda activate llava_captioner
 pip3 install -e .
-pip3 install transformers==4.31.0 
 pip3 install protobuf
-````
+```
 3. Finally you can chat with the model through CLI by passing our model as the model path:
 ```
 python3 -m llava.serve.cli  --model-path AmirHossein1378/LLaVA-1.5-7b-meme-captioner    --image-file PATH_TO_IMAGE_FILE
