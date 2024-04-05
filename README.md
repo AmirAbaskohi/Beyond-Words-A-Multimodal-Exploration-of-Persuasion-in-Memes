@@ -447,6 +447,12 @@ Feel free to consult related work that provides the groundwork for our framework
 If you find our work or models useful for your research and applications, please cite using this BibTeX:
 
 ```
-@inproceedings{
+@misc{abaskohi2024bcamirs,
+      title={BCAmirs at SemEval-2024 Task 4: Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes}, 
+      author={Amirhossein Abaskohi and Amirhossein Dabiriaghdam and Lele Wang and Giuseppe Carenini},
+      year={2024},
+      eprint={2404.03022},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
 }
 ```
