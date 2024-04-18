@@ -77,6 +77,7 @@ cd LLaVA
 ```
 conda create -n llava_captioner python=3.10 -y
 conda activate llava_captioner
+pip3 install transformers==4.31.0 
 pip3 install -e .
 pip3 install protobuf
 ```
