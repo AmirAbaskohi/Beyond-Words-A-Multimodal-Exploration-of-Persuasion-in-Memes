@@ -66,6 +66,8 @@ For some parts, you may require our generated captions. In case needed, you can 
 
 ### Meme Captioning Model
 
+\*\*<b>Important: When we talk about generating captions here, we're referring to the model creating a concise description of the meme, including its purpose and target audience, rather than generating the text that should appear within the meme itself. </b>\*\*
+
 Our meme captioner model, i.e., fine-tuned LLaVA-1.5-7B, is released [here on huggingface](https://huggingface.co/AmirHossein1378/LLaVA-1.5-7b-meme-captioner). To run it follow these steps:
 
 1. Clone this repository and navigate to LLaVA folder:
