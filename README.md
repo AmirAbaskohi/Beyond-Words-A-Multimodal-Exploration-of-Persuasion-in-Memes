@@ -7,13 +7,13 @@
 <p align="center">
   <br>
   <a href="https://arxiv.org/abs/2404.03022"><img alt="Paper" src="https://img.shields.io/badge/📃-Paper-808080"></a>
-  <a href="#"><img alt="Video" src="https://img.shields.io/badge/​-Video-red?logo=youtube&logoColor=FF0000"></a>
+  <a href="https://drive.google.com/file/d/1000VecXDtTzwpBrSV9VXl-1LycdZ6Ylb/view?usp=drive_link"><img alt="Video" src="https://img.shields.io/badge/​-Video-red?logo=youtube&logoColor=FF0000"></a>
   <a href="https://huggingface.co/AmirHossein1378/LLaVA-1.5-7b-meme-captioner"><img alt="Video" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue"></a>
-  <a href="#"><img alt="Slides" src="https://img.shields.io/badge/​-Slides-FFBB00?logo=googlesheets&logoColor=FFBB00"></a>
+  <a href="https://drive.google.com/file/d/1WvsWzicOyJTK4KRfy1SeSs8DqjonljYk/view?usp=sharing"><img alt="Slides" src="https://img.shields.io/badge/​-Slides-FFBB00?logo=googlesheets&logoColor=FFBB00"></a>
 </p>
 
 ## Intro
-This repo covers the implementation of the following paper:  **[BCAmirs at SemEval-2024 Task 4: Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes](https://arxiv.org/abs/2404.03022)** by [Amirhossein Abaskohi](https://amirabaskohi.github.io/), [Amirhossein Dabiriaghdam](https://dabiriaghdam.ir/), [Lele Wang](https://ece.ubc.ca/lele-wang/), and [Giuseppe Carenini](https://www.cs.ubc.ca/~carenini/), accepted to SemEval@NAACL 2024.
+This repo covers the implementation of the following paper:  **[BCAmirs at SemEval-2024 Task 4: Beyond Words: A Multimodal and Multilingual Exploration of Persuasion in Memes](https://arxiv.org/abs/2404.03022)** by [Amirhossein Abaskohi*](https://amirabaskohi.github.io/), [Amirhossein Dabiriaghdam*](https://dabiriaghdam.ir/), [Lele Wang](https://ece.ubc.ca/lele-wang/), and [Giuseppe Carenini](https://www.cs.ubc.ca/~carenini/), accepted to SemEval@NAACL 2024. (* Equal Contribution)
 
 ## Abstract
 Memes, combining text and images, frequently use metaphors to convey persuasive messages, shaping public opinion. Motivated by this, our team engaged in SemEval-2024 Task 4, a hierarchical multi-label classification task designed to identify rhetorical and psychological persuasion techniques embedded within memes. To tackle this problem, we introduced a caption generation step to assess the modality gap and the impact of additional semantic information from images, which improved our result. Our best model utilizes GPT-4 generated captions alongside meme text to fine-tune RoBERTa as the text encoder and CLIP as the image encoder. It outperforms the baseline by a large margin in all 12 subtasks. In particular, it ranked in top-3 across all languages in Subtask 2a, and top-4 in Subtask 2b, demonstrating quantitatively strong performance. The improvement achieved by the introduced intermediate step is likely attributable to the metaphorical essence of images that challenges visual encoders. This highlights the potential for improving abstract visual semantics encoding.
@@ -24,18 +24,18 @@ Results of our best model (at the time of submitting evaluation results) on the 
 
 | Subtask                 | Ours     | Baseline | Rank |
 |-------------------------|----------|----------|------|
-| 2a - English            | **70.497** | 44.706   | 3    |
-| 2a - Bulgarian          | **62.693** | 50.000   | 1    |
-| 2a - North Macedonian   | **63.681** | 55.525   | 1    |
-| 2a - Arabic             | **52.613** | 48.649   | 1    |
-| 2b - English            | **80.337** | 25.000   | 4    |
-| 2b - Bulgarian          | **64.719** | 16.667   | 4    |
-| 2b - North Macedonian   | **64.719** | 09.091   | 4    |
-| 2b - Arabic             | **61.487** | 22.705   | 1    |
-| 1 - English             | **69.857** | 36.865   | 2    |
-| 1 - Bulgarian           | **44.834** | 28.377   | 13   |
-| 1 - North Macedonian   | **39.298** | 30.692   | 12   |
-| 1 - Arabic             | **39.625** | 35.897   | 9    |
+| 2a - English            | **70.497** | 44.706   | 3 / 15    |
+| 2a - Bulgarian          | **62.693** | 50.000   | 1 / 9    |
+| 2a - North Macedonian   | **63.681** | 55.525   | 1 / 9   |
+| 2a - Arabic             | **52.613** | 48.649   | 1 / 7   |
+| 2b - English            | **80.337** | 25.000   | 4 /  22 |
+| 2b - Bulgarian          | **64.719** | 16.667   | 4 / 16   |
+| 2b - North Macedonian   | **56.098** | 09.091   | 4 / 16   |
+| 2b - Arabic             | **61.487** | 22.705   | 1 / 15  |
+| 1 - English             | **69.857** | 36.865   | 2 / 33   |
+| 1 - Bulgarian           | **44.834** | 28.377   | 13 / 20  |
+| 1 - North Macedonian   | **39.298** | 30.692   | 12 / 20  |
+| 1 - Arabic             | **39.625** | 35.897   | 9 / 17  |
 
 ## Method
 Building upon prior research on MLLMs, the prevailing method involves tokenizing image concepts and conveying these tokens alongside textual tokens to a language model. While these models possess the ability to impart more semantic information from the image, their focus typically centers on identifying objects and their relationships within the image. Consequently, this study explores the impact of initially prompting the model to generate descriptive information aimed at conveying semantic context. We utilize this information for data classification, comparing it to the conventional approach of fine-tuning an end-to-end model.
